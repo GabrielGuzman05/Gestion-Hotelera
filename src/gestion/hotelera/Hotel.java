@@ -21,11 +21,11 @@ public class Hotel {
         }
     }
     
-    public void cambiarEstado(int n, int m){
-        Habitaciones.get(n).setEstado(m);
+    public void reservarHabitacion(int n){
+        Habitaciones.get(n).setEstado(3);
     }
     
-    public void reset(){
+    public void resetHotel(){
         for(int i=0;i<Habitaciones.size();i++){
             desocuparHabitacion(i);
         }
@@ -46,4 +46,8 @@ public class Hotel {
         Habitaciones.get(n).setEstado(2);
         Habitaciones.get(n).setNoches(0);
     }
+    
+    public void ingresoHuespedNuevo(){}
+    
+    public void ingresoHuespedReserva(){}
 }
