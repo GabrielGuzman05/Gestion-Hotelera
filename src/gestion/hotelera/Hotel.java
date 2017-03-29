@@ -17,7 +17,33 @@ public class Hotel {
     Hotel(){
         for(int i=0;i<10;i++){
             Habitacion hab = new Habitacion();
+            Habitaciones.add(hab);
         }
     }
     
+    public void cambiarEstado(int n, int m){
+        Habitaciones.get(n).setEstado(m);
+    }
+    
+    public void reset(){
+        for(int i=0;i<Habitaciones.size();i++){
+            desocuparHabitacion(i);
+        }
+    }
+    
+    public void consultarEstado(int n){
+        System.out.println("La habitacion "+n+" esta "+Habitaciones.get(n-1).getEstado());
+    }
+    
+    public void boleta(int n){
+        int total;
+        total=Habitaciones.get(n).getNoches()*40000;
+        System.out.println("El total por su habitacion es "+total);
+        desocuparHabitacion(n);
+    }
+    
+    public void desocuparHabitacion(int n){
+        Habitaciones.get(n).setEstado(2);
+        Habitaciones.get(n).setNoches(0);
+    }
 }
