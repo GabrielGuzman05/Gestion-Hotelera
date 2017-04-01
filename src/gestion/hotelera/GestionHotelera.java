@@ -18,8 +18,17 @@ public class GestionHotelera {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        menu();
-    }
+        int option;
+        do{
+            menu();
+            System.out.println("¿Desea realizar otra accion?");
+            System.out.println("1 es si - 2 es no");
+            do{
+            option=ingresarValorNumerico();
+            }while(option<1||option>2);
+        }while(option==1);
+        }
+    
     
     public static void menu(){
         Hotel hotel = new Hotel();
@@ -31,9 +40,11 @@ public class GestionHotelera {
             opcion=ingresarValorNumerico();
         }
         int habitacion=-1;
-        System.out.println("Ingrese el numero de la habitacion");
-        while(habitacion<0||habitacion>9){
-            habitacion=ingresarValorNumerico()-1;
+        if(opcion!=6){
+            System.out.println("Ingrese el numero de la habitacion");
+            while(habitacion<0||habitacion>9){
+                habitacion=ingresarValorNumerico()-1;
+            }
         }
         int noches = 0;
         switch(opcion){
