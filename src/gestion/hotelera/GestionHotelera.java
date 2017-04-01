@@ -5,6 +5,9 @@
  */
 package gestion.hotelera;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 /**
  *
  * @author Gabriel
@@ -15,19 +18,35 @@ public class GestionHotelera {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        menu();
+    }
+    
+    public static void menu(){
         Hotel hotel = new Hotel();
         System.out.println("¿Que desea hacer?");
         System.out.println("1 Cobro de habitacion - 2 Reserva de habitacion - 3 Consultar estado");
         System.out.println("4 Ingreso de huesped nuevo - 5 Ingreso de huesped con reserva - 6 Reiniciar el sistema");
         int opcion=0;
-        int habitacion=0;
+        while(opcion<1||opcion>6){
+            opcion=ingresarValorNumerico();
+        }
+        int habitacion=-1;
+        System.out.println("Ingrese el numero de la habitacion");
+        while(habitacion<0||habitacion>9){
+            habitacion=ingresarValorNumerico()-1;
+        }
+        int noches = 0;
         switch(opcion){
             case 1:
                 hotel.boleta(habitacion);
                 break;
-                
+
             case 2:
-                hotel.reservarHabitacion(habitacion);
+                System.out.println("Ingrese la cantidad de noches en la reserva");
+                while(noches<1){
+                    noches=ingresarValorNumerico();
+                }
+                hotel.reservarHabitacion(habitacion,noches);
                 break;
                 
             case 3:
@@ -35,15 +54,37 @@ public class GestionHotelera {
                 break;
                 
             case 4:
+                System.out.println("Ingrese la cantidad de noches del nuevo huesped");
+                while(noches<1){
+                    noches=ingresarValorNumerico();
+                }
+                hotel.ingresoHuespedNuevo(habitacion,noches);
                 break;
             
             case 5:
+                hotel.ingresoHuespedReserva(habitacion);
                 break;
                 
             case 6:
                 hotel.resetHotel();
                 break;
         }
+    }
+    
+    public static int ingresarValorNumerico(){
+        int opcion=0;
+        boolean error;
+        do{
+            error=false;
+            try{
+                Scanner leer = new Scanner(System.in);
+                opcion=leer.nextInt();
+            }catch(InputMismatchException e){
+                error=true;
+                System.out.println("Error - Ingrese de nuevo el dato");
+            }
+        }while(error);
+        return opcion;
     }
     
 }

@@ -12,7 +12,7 @@ package gestion.hotelera;
 import java.util.ArrayList;
 
 public class Hotel {
-    private ArrayList<Habitacion> Habitaciones;
+    private ArrayList<Habitacion> Habitaciones= new ArrayList();
     
     Hotel(){
         for(int i=0;i<10;i++){
@@ -21,8 +21,9 @@ public class Hotel {
         }
     }
     
-    public void reservarHabitacion(int n){
+    public void reservarHabitacion(int n,int m){
         Habitaciones.get(n).setEstado(3);
+        Habitaciones.get(n).setNoches(m);
     }
     
     public void resetHotel(){
@@ -47,7 +48,20 @@ public class Hotel {
         Habitaciones.get(n).setNoches(0);
     }
     
-    public void ingresoHuespedNuevo(){}
+    public void ingresoHuespedNuevo(int n,int m){
+        if("Ocupada".equals(Habitaciones.get(n).getEstado())||"Reservada".equals(Habitaciones.get(n).getEstado())){
+            System.out.println("Error - Habitacion no disponible");
+        }else{
+            Habitaciones.get(n).setEstado(1);
+            Habitaciones.get(n).setNoches(m);
+        }
+    }
     
-    public void ingresoHuespedReserva(){}
+    public void ingresoHuespedReserva(int n){
+        if("Reservada".equals(Habitaciones.get(n).getEstado())){
+            Habitaciones.get(n).setEstado(1);
+        }else{
+            System.out.println("Error esta no es una habitacion reservada");
+        }
+    }
 }
